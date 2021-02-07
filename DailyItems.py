@@ -1,5 +1,5 @@
 import os
-import time
+import datetime
 import json
 from apscheduler.schedulers.background import BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
@@ -17,11 +17,14 @@ class Crontab:
 
 
 def daily_job():
+    print('%s ready to run script...' % (datetime.datetime.now()))
     with open('settings.path.properties', 'r', encoding = 'utf-8') as f1:
         properties_path = f1.read()
     with open(properties_path, 'r', encoding = 'utf-8') as f2:
-        for line in f2.readlines():
-            os.system(line)
+        print('%s start running script...' % (datetime.datetime.now()))
+        for command in f2.readlines():
+            os.system(command)
+        print('%s successfully running script.' % (datetime.datetime.now()))
 
 if __name__ == "__main__":
     # 建立排程物件
