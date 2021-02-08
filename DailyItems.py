@@ -11,9 +11,8 @@ class Crontab:
         with open(crontab_path, 'r', encoding = 'utf-8') as f2:
             self.data_sources = json.loads(f2.read())
 
-    def getCrontabProperty(self, key):
-        dataSource = self.data_sources[key]
-        return dataSource
+    def get_crontab_property(self, key):
+        return self.data_sources[key]
 
 
 def daily_job():
@@ -33,9 +32,9 @@ if __name__ == "__main__":
     # 排程設定class
     crontab = Crontab()
     # 取的小時設定檔
-    hour = crontab.getCrontabProperty('hour')
+    hour = crontab.get_crontab_property('hour')
     # 取的分鐘設定檔
-    minute = crontab.getCrontabProperty('minute')
+    minute = crontab.get_crontab_property('minute')
 
     # 使用cronTab方式設定作業時間
     cronTrigger = CronTrigger(hour = hour, minute = minute)
